@@ -1,0 +1,72 @@
+{
+  "title": "MyIP Metadata Standard",
+  "description": "Metadata schema for intellectual property registered on MySocial blockchain.",
+  "type": "object",
+  "properties": {
+    "myip_id": {
+      "type": "string",
+      "description": "Unique MyIP identifier assigned to the content."
+    },
+    "title": {
+      "type": "string",
+      "description": "Title of the content."
+    },
+    "creator": {
+      "type": "string",
+      "description": "Blockchain address or identity of the original creator."
+    },
+    "creation_date": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp marking the content's creation."
+    },
+    "content_type": {
+      "type": "string",
+      "enum": ["video", "image", "audio", "text", "other"],
+      "description": "Type of digital content."
+    },
+    "license": {
+      "type": "string",
+      "description": "License type governing content usage and rights."
+    },
+    "hash": {
+      "type": "string",
+      "description": "Cryptographic hash of the content to verify integrity."
+    },
+    "storage_uri": {
+      "type": "string",
+      "description": "Decentralized storage link (e.g., IPFS, Arweave) to access content."
+    },
+    "royalty_percentage": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Royalty percentage for resale or licensing."
+    },
+    "transferable": {
+      "type": "boolean",
+      "description": "Indicates if the ownership of the content is transferable."
+    },
+    "owners": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "description": "List of current owner addresses."
+      }
+    },
+    "history": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "event": { "type": "string", "description": "Event type (e.g., creation, transfer, license)." },
+          "timestamp": { "type": "string", "format": "date-time", "description": "Time of the event." },
+          "transaction_hash": { "type": "string", "description": "Transaction hash for verification." },
+          "involved_parties": { "type": "array", "items": { "type": "string" }, "description": "List of parties involved in the event." }
+        },
+        "description": "History of significant events related to this IP."
+      }
+    }
+  },
+  "required": ["myip_id", "title", "creator", "creation_date", "content_type", "hash", "storage_uri"]
+}
